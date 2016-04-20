@@ -1,4 +1,4 @@
-export default function(controller) {
+module.exports = function(controller) {
   return {
     connectCerebral: function (statePaths, signalPaths) {
       const tag = this
