@@ -2,9 +2,8 @@
 *Connects Riot tags to the necessary Cerebral state and signals*
 
 ## Usage
-1. **Connect cerebral and riot through a mixin**  
-Import the function exposed by `cerebral-view-riot`, it's our mixin creator/factory.
-After preparing your cerebral controller you pass it to the mixin creator.
+### 1. Connect cerebral and riot through a mixin
+`cerebral-view-riot` gives you a mixin factory. To create the mixin it needs the cerebral controller. When you have the mixin register it with [riot.mixin](http://riotjs.com/guide/#mixins).
 
   ```js
   import Controller from 'cerebral'
@@ -15,14 +14,11 @@ After preparing your cerebral controller you pass it to the mixin creator.
 
   // global mixin - affects all tags directly
   riot.mixin(createMixin(controller))
-
-  // named mixin - tags need to opt in with this.mixin('cerebral')
-  riot.mixin('cerebral', createMixin(controller))
   ```
 
-2. **Listen on state and trigger signals in your tags**  
-Your tags now have `this.connectCerebral` available. With this method we can specify the state we want to append to `this` using paths. `connectCerebral` will start listening to changes on that state and run `this.update` whenever it changes.  
-We can also specify signals we want available in our tag. You reach signals with paths too, but as the second argument to `connectCerebral`.
+### 2. Listen on state and trigger signals in your tags
+All tags now have `this.connectCerebral`. Pass it an object where the keys are property names you want to populate on the tag scope and the value being a state path. `connectCerebral` will start listening to changes on that state. On changes it will repopulate the tag and run `this.update`.  
+You reach signals the same way, just pass a second argument object to `connectCerebral`.
 
   ```html
   <thing-list>
@@ -36,11 +32,9 @@ We can also specify signals we want available in our tag. You reach signals with
       }, {
         highlight: ['thingsModule', 'highlight']
       })
-
-      /* We now have
-       * this.list referencing state.thingsModule.list
-       * this.highlight referencing state.getSignals().thingsModule.highlight
-       */
     </script>
   </thing-list>
   ```
+  We now have:  
+  `this.list` updated from `controller.get().thingsModule.list` on change + this.update()
+  `this.highlight` referencing `controller.getSignals().thingsModule.highlight`
