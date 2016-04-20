@@ -1,27 +1,36 @@
 module.exports = function(controller) {
   return {
     connectCerebral: function (statePaths, signalPaths) {
-      const tag = this
+      var tag = this
 
       // Attach signals to tag
       if(signalPaths) {
-        Object.keys(signalPaths).forEach((key) => {
+        Object.keys(signalPaths).forEach(function(key) {
           tag[key] = controller.getSignals(signalPaths[key])
         })
       }
 
       // Attach state and udpate tag on state changes
       if(statePaths) {
-        const updateState = function () {
-          Object.keys(statePaths).forEach((key) => {
-            tag[key] = controller.get(statePaths[key])
+        var updateState = function() {
+          var shouldUpdate = false
+
+          Object.keys(statePaths).forEach(function(key) {
+            var newState = controller.get(statePaths[key])
+            if (tag[key] !== newState) {
+              tag[key] = newState
+              shouldUpdate = true
+            }
           })
-          tag.update()
+
+          if(shouldUpdate) {
+            tag.update()
+          }
         }
 
         // Setup state listener and cleanup logic
         controller.on('change', updateState)
-        tag.on('unmount', () => {
+        tag.on('unmount', function() {
           controller.removeListener('change', updateState)
         })
 
