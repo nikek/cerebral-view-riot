@@ -1,6 +1,6 @@
 {
   "name": "cerebral-view-riot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Connects Riot tags to necessary Cerebral state and signals",
   "main": "index.js",
   "scripts": {
