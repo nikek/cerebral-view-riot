@@ -17,13 +17,13 @@
   ```
 
 ### 2. Listen on state and trigger signals in your tags
-All tags now have `this.connectCerebral`. Pass it an object where the keys are property names you want to populate on the tag scope and the value being a state path. `connectCerebral` will start listening to changes on that state. On changes it will repopulate the tag and run `this.update`.  
+All tags now have `this.connectCerebral`. Pass it an object where the keys are property names you want to populate on the tag scope and the values are cerebral state paths.  
 You reach signals the same way, just pass a second argument object to `connectCerebral`.
 
   ```html
   <thing-list>
     <ul>
-      <li each="thing in list" onclick={highlight}>thing.name</li>
+      <li each={ thing in list } onclick={highlight}>{thing.name}</li>
     </ul>
 
     <script>
@@ -35,6 +35,9 @@ You reach signals the same way, just pass a second argument object to `connectCe
     </script>
   </thing-list>
   ```
-  We now have:  
-  `this.list` updated from `controller.get().thingsModule.list` on change + this.update()
-  `this.highlight` referencing `controller.getSignals().thingsModule.highlight`
+
+  We now have:
+  * `this.list`  
+  `connectCerebral` will listen to changes on `controller.get().thingsModule.list`. Whenever it updates `connectCerebral` will repopulate the `this.list` and run `this.update` on the tag.
+  * `this.highlight`  
+  Referencing `controller.getSignals().thingsModule.highlight`
