@@ -1,6 +1,6 @@
 {
   "name": "cerebral-view-riot",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Connects Riot tags to necessary Cerebral state and signals",
   "author": "Niklas Ek <ek.niklas@gmail.com>",
   "repository": "nikek/cerebral-view-riot",
