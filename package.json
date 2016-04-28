@@ -2,6 +2,8 @@
   "name": "cerebral-view-riot",
   "version": "0.1.2",
   "description": "Connects Riot tags to necessary Cerebral state and signals",
+  "author": "Niklas Ek <ek.niklas@gmail.com>",
+  "repository": "nikek/cerebral-view-riot",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,6 +16,5 @@
     "mixin",
     "view"
   ],
-  "author": "Niklas Ek",
   "license": "MIT"
 }
