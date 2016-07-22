@@ -10,7 +10,7 @@ module.exports = function(controller) {
         })
       }
 
-      // Attach state and udpate tag on state changes
+      // Attach state and update tag on state changes
       if(statePaths) {
         var updateState = function() {
           var shouldUpdate = false
